@@ -3,9 +3,9 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
+  "/notes": "pages/notes.js",
   "/login": "pages/login.js",
   "/api/auth/login": "pages/api/auth/login.js",
-  "/notes": "pages/notes.js",
-  "/api/notes": "pages/api/notes.js",
-  "/api/health": "pages/api/health.js"
+  "/api/health": "pages/api/health.js",
+  "/api/notes": "pages/api/notes.js"
 }
