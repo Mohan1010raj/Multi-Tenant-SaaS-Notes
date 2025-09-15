@@ -20,22 +20,60 @@ async function main() {
   const pass = await bcrypt.hash('password', 10)
 
   console.log("👥 Creating users...")
-  await prisma.user.createMany({
-    data: [
-      { email: "admin@acme.test", password: pass, role: "ADMIN", tenantId: acme.id },
-      { email: "user@acme.test", password: pass, role: "MEMBER", tenantId: acme.id },
-      { email: "admin@globex.test", password: pass, role: "ADMIN", tenantId: globex.id },
-      { email: "user@globex.test", password: pass, role: "MEMBER", tenantId: globex.id },
-    ]
+  await prisma.user.create({
+    data: {
+      email: "admin@acme.test",
+      password: pass,
+      role: "ADMIN",
+      tenantId: acme.id,
+    }
+  })
+  await prisma.user.create({
+    data: {
+      email: "user@acme.test",
+      password: pass,
+      role: "MEMBER",
+      tenantId: acme.id,
+    }
+  })
+  await prisma.user.create({
+    data: {
+      email: "admin@globex.test",
+      password: pass,
+      role: "ADMIN",
+      tenantId: globex.id,
+    }
+  })
+  await prisma.user.create({
+    data: {
+      email: "user@globex.test",
+      password: pass,
+      role: "MEMBER",
+      tenantId: globex.id,
+    }
   })
 
   console.log("📝 Creating sample notes...")
-  await prisma.note.createMany({
-    data: [
-      { title: "Acme - Welcome", content: "Welcome to Acme notes!", tenantId: acme.id },
-      { title: "Acme - Tip", content: "Remember to write good notes.", tenantId: acme.id },
-      { title: "Globex - Welcome", content: "Welcome to Globex notes!", tenantId: globex.id },
-    ]
+  await prisma.note.create({
+    data: {
+      title: "Acme - Welcome",
+      content: "Welcome to Acme notes!",
+      tenantId: acme.id,
+    }
+  })
+  await prisma.note.create({
+    data: {
+      title: "Acme - Tip",
+      content: "Remember to write good notes.",
+      tenantId: acme.id,
+    }
+  })
+  await prisma.note.create({
+    data: {
+      title: "Globex - Welcome",
+      content: "Welcome to Globex notes!",
+      tenantId: globex.id,
+    }
   })
 
   console.log("✅ Seed complete! Accounts created:")
