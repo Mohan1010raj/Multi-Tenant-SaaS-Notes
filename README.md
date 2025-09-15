@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # SaaS Notes - Multi-tenant Demo
 
 This is a sample multi-tenant SaaS Notes application built with Next.js (API routes) and Prisma (SQLite).
@@ -42,3 +43,6 @@ This is a demo. For production use:
 - Harden JWT & cookie handling, HTTPS, input validation.
 - Add rate limiting and proper email invite flows.
 
+=======
+# Multi-Tenant-SaaS-Notes
+>>>>>>> d47f3c3d2ea1a2d58a15074d6e90e97053f02704

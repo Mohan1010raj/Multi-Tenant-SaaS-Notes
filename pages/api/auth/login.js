@@ -8,22 +8,34 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { email, password } = req.body || {}
+    const { email, password } = req.body
+
     if (!email || !password) {
-      return res.status(400).json({ error: 'Email & password required' })
+      return res.status(400).json({ error: 'Email & password are required' })
     }
 
-    const user = await prisma.user.findUnique({ where: { email } })
+    // Find user by email
+    const user = await prisma.user.findUnique({
+      where: { email },
+    })
+
     if (!user) {
       return res.status(401).json({ error: 'Invalid credentials' })
     }
 
-    const ok = await bcrypt.compare(password, user.password)
-    if (!ok) {
+    // Compare hashed password
+    const isPasswordValid = await bcrypt.compare(password, user.password)
+    if (!isPasswordValid) {
       return res.status(401).json({ error: 'Invalid credentials' })
     }
 
-    const token = sign(user)
+    // Generate JWT token
+    const token = sign({
+      id: user.id,
+      email: user.email,
+      role: user.role,
+      tenantId: user.tenantId,
+    })
 
     return res.status(200).json({
       token,
@@ -34,8 +46,8 @@ export default async function handler(req, res) {
         tenantId: user.tenantId,
       },
     })
-  } catch (err) {
-    console.error('Login error:', err)
+  } catch (error) {
+    console.error('Login error:', error)
     return res.status(500).json({ error: 'Internal server error' })
   }
 }
